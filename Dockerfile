@@ -1,0 +1,2 @@
+ARG CLOUD9_VERSION=0.1.0
+FROM rebelplutonium/cloud9:${CLOUD9_VERSION}
