@@ -1,2 +1,2 @@
-ARG CLOUD9_VERSION=1.1.0
-FROM rebelplutonium/cloud9:${CLOUD9_VERSION}
+ARG CLOUD9_SEMVER=1.1.0
+FROM rebelplutonium/cloud9:${CLOUD9_SEMVER}
