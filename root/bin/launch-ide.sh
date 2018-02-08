@@ -108,7 +108,7 @@ export PROJECT_NAME=hacker &&
     CIDFILE=$(mktemp /srv/docker/containers/XXXXXXXX) &&
     rm -f ${CIDFILE} &&
     export PROJECT_NAME="${PROJECT_NAME}" &&
-    docker \
+    /usr/bin/docker \
         container \
         create \
         --cidfile ${CIDFILE} \
