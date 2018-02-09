@@ -11,5 +11,10 @@ dnf update --assumeyes &&
     dnf install --assumeyes gnucash fuse-sshfs &&
     dnf install --assumeyes procps-ng &&
     sed -i "s+^# user_allow_other\$+user_allow_other+" /etc/fuse.conf &&
-    mkdir /srv/ids &&
-dnf clean all
+    curl http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo > /etc/yum.repos.d/virtualbox.repo &&
+    dnf update --assumeyes &&
+    dnf install --assumeyes binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms &&
+    dnf install --assumeyes VirtualBox-5.2 &&
+    /usr/lib/virtualbox/vboxdrv.sh setup &&
+    usermod -a -G vboxusers user &&
+    dnf clean all
