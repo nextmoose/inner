@@ -17,4 +17,7 @@ dnf update --assumeyes &&
     dnf install --assumeyes VirtualBox-5.2 &&
     /usr/lib/virtualbox/vboxdrv.sh setup &&
     usermod -a -G vboxusers user &&
+    dnf install --assumeyes xz &&
+    curl https://releases.hashicorp.com/vagrant/2.0.2/vagrant_2.0.2_x86_64.tar.xz?_ga=2.200176938.54320238.1518152962-1370890264.1518152962 | tar --extract --xz --directory /opt &&
+    ln -sf /opt/vagrant/bin/* /usr/local/bin &&
     dnf clean all
