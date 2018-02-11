@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ps all | grep "node /opt/docker/c9sdk/server.js --listen 0.0.0.0 -w /opt/docker/workspace -p " | head -n 1 | sed -e "s#^[0-9]*\s*[0-9]*\s*##" | cut -f1 -d " " | while read PID
+ps -e -o uid=,pid=,command= | grep "^ *1000 *" | sed "s#^ *1000 *##" | grep " *node /opt/docker/c9sdk/server.js --listen 0.0.0.0 -w /opt/docker/workspace -p ${CLOUD9_PORT}\$" | sed -e "s# *node /opt/docker/c9sdk/server.js --listen 0.0.0.0 -w /opt/docker/workspace -p ${CLOUD9_PORT}\$##"
 do
     kill ${PID}
 done
