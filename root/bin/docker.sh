@@ -6,6 +6,6 @@
     --interactive \
     --tty \
     --rm \
-    --workdir $(pwd})
+    --workdir $(pwd) \
     docker:${DOCKER_SEMVER}-ce \
         "${@}"
