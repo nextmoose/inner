@@ -6,25 +6,7 @@ _UseGetOpt() {
         CUR=${COMP_WORDS[COMP_CWORD]} &&
         case "${CUR}" in
             -)
-                COMPREPLY=($( compgen -W "--host --master-branch --upstream- --origin- --report- --cloud9-port --checkout-branch --gpg --user-" -- ${CUR}))
-            ;;
-            --h*)
-                COMPREPLY=($( compgen -W "--host-name --host-port" -- ${CUR}))
-            ;;
-            --host-n)
-                COMPREPLY=($( compgen -W "--host-name github.com" -- ${CUR}))
-            ;;
-            --host-p)
-                COMPREPLY=($( compgen -W "--host-port 22" -- ${CUR}))
-            ;;
-            --m*)
-                COMPREPLY=($( compgen -W "--master-branch master" -- ${CUR}))
-            ;;
-            --u*)
-                COMPREPLY=($( compgen -W "--upstream-id-rsa --upstream-organization --upstream-organization --upstream-repository" -- ${CUR}))
-            ;;
-            --upstream-id-rsa)
-                COMPREPLY=($( compgen -W "--upstream-id-rsa --upstream-organization --upstream-organization --upstream-repository" -- ${CUR}))
+                COMPREPLY=($( compgen -W "--host-name --host-port --master-branch --upstream-id-rsa --upstream-organization --upstream-repository --origin-id-rsa --origin-organization --origin-repository  --report-id-rsa --report-organization --report-repository --project-name --cloud9-port --checkout-branch --gpg-secret-key --gpg2-secret-key --gpg-owner-trust --gpg2-owner-trust --gpg-key-id --user-name --user-email --user-" -- ${CUR}))
             ;;
         esac
   return 0
