@@ -136,5 +136,5 @@ export PROJECT_NAME=hacker &&
         --env USER_NAME \
         --env USER_EMAIL \
         rebelplutonium/github:0.0.8 &&
-    /usr/bin/docker network connect --alias ${PROJECT_NAME} main $(cat ${CIDFILE}) &&
-    /usr/bin/docker container start $(cat ${CIDFILE})
+    docker network connect --alias ${PROJECT_NAME} main $(cat ${CIDFILE}) &&
+    docker container start $(cat ${CIDFILE})
