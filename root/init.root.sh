@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mkdir /srv/docker/{containers,images,networks,volumes,workspace} &&
-    chown user:user /srv/docker/{containers,images,networks,volumes,workspace}
+mkdir /srv/docker/{containers,images,networks,volumes,workspaces} &&
+    chown user:user /srv/docker/{containers,images,networks,volumes,workspaces}
