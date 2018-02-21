@@ -52,7 +52,11 @@ done &&
                 --gpg2-owner-trust "${GPG2_OWNER_TRUST}" \
                 --gpg-key-id "${GPG_KEY_ID}" \
                 --secrets-organization "${SECRETS_ORGANIZATION}" \
-                --secrets-repository "${SECRETS_REPOSITORY}"
+                --secrets-repository "${SECRETS_REPOSITORY}" \
+                --docker-semver "${DOCKER_SEMVER}" \
+                --browser-semver "${BROWSER_SEMVER}" \
+                --middle-semver "${MIDDLE_SEMVER}" \
+                --inner-semver "${INNER_SEMVER}"
     else
         sudo \
             /usr/bin/docker \
@@ -73,5 +77,9 @@ done &&
                 --gpg2-owner-trust "${GPG2_OWNER_TRUST}" \
                 --gpg-key-id "${GPG_KEY_ID}" \
                 --secrets-organization "${SECRETS_ORGANIZATION}" \
-                --secrets-repository "${SECRETS_REPOSITORY}"
-    fi
+                --secrets-repository "${SECRETS_REPOSITORY}" \
+                --docker-semver "${DOCKER_SEMVER}" \
+                --browser-semver "${BROWSER_SEMVER}" \
+                --middle-semver "${MIDDLE_SEMVER}" \
+                --inner-semver "${INNER_SEMVER}"
+        fi
