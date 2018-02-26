@@ -81,7 +81,7 @@ export CLOUD9_PORT=10604 &&
         --env USER_EMAIL \
         --env ORIGIN_ORGANIZATION \
         --env ORIGIN_REPOSITORY \
-        --env ORIGIN_ID_RSA \
+        --env ORIGIN_ID_RSA="$(pass show origin.id_rsa)" \
         --env HOST_NAME \
         --env HOST_PORT \
         --env USER_NAME \
