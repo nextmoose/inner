@@ -25,4 +25,6 @@ TEMP=$(mktemp -d) &&
     done &&
     pass git fetch origin master &&
     pass git checkout master &&
-    mkdir /home/user/workspace/projects
+    mkdir /home/user/workspace/projects &&
+    mkdir /home/user/docker &&
+    mkdir /home/user/docker/{container,image,network,volume}

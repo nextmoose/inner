@@ -1,24 +1,24 @@
-!/bin/sh
+#!/bin/sh
 
-ls -1 /srv/docker/containers | while read FILE
+ls -1 /home/user/docker/containers | while read FILE
 do
-    sudo /usr/bin/docker container stop $(cat /srv/docker/containers/${FILE}) &&
-        sudo /usr/bin/docker container rm --volumes $(cat /srv/docker/containers/${FILE}) &&
-        rm -f /srv/docker/${FILE}
+    sudo /usr/bin/docker container stop $(cat /home/user/docker/containers/${FILE}) &&
+        sudo /usr/bin/docker container rm --volumes $(cat /home/user/docker/containers/${FILE}) &&
+        rm -f /home/user/docker/${FILE}
 done &&
-    ls -1 /srv/docker/images | while read FILE
+    ls -1 /home/user/docker/images | while read FILE
     do
-        sudo /usr/bin/docker image rm $(cat /srv/docker/images/${FILE}) &&
-            rm -f /srv/docker/${FILE}
+        sudo /usr/bin/docker image rm $(cat /home/user/docker/images/${FILE}) &&
+            rm -f /home/user/docker/${FILE}
     done &&
-    ls -1 /srv/docker/networks | while read FILE
+    ls -1 /home/user/docker/networks | while read FILE
     do
-        sudo /usr/bin/docker network rm $(cat /srv/docker/networks/${FILE}) &&
-            rm -f /srv/docker/${FILE}
+        sudo /usr/bin/docker network rm $(cat /home/user/docker/networks/${FILE}) &&
+            rm -f /home/user/docker/${FILE}
     done &&
-    ls -1 /srv/docker/volumes | while read FILE
+    ls -1 /home/user/docker/volumes | while read FILE
     do
-        sudo /usr/bin/docker volume rm $(cat /srv/docker/volumes/${FILE}) &&
-            rm -f /srv/docker/${FILE}
+        sudo /usr/bin/docker volume rm $(cat /home/user/docker/volumes/${FILE}) &&
+            rm -f /home/user/docker/${FILE}
     done
         
