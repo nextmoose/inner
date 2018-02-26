@@ -46,7 +46,7 @@ export CLOUD9_PORT=10604 &&
                     shift
             ;;
             --expiry)
-                export EXPIRY=$(date --date ${2} +%s) &&
+                export EXPIRY=$(date --date "${2}" +%s) &&
                     shift 2
             ;;
             *)
