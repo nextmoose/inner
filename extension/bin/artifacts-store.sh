@@ -31,4 +31,4 @@ done &&
     sudo gzip -9 ${NAME}-$(date +%Y%b%d).tar &&
     sudo chown user:user ${NAME}-$(date +%Y%b%d).tar.gz &&
     stat ${NAME}-$(date +%Y%b%d).tar.gz &&
-    aws s3 cp ${NAME}-$(date +%Y%b%d).tar.gz s3://${BUCKET}/${NAME}-$(date +%Y%b%d).tar.gz
+    aws s3 cp --expected-size $(stat --format %s ${NAME}-$(date +%Y%b%d).tar.gz ) ${NAME}-$(date +%Y%b%d).tar.gz s3://${BUCKET}/${NAME}-$(date +%Y%b%d).tar.gz
