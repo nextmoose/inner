@@ -30,6 +30,8 @@ done &&
     PARTS_COUNT=$(aws s3api get-object --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part 1 parts/00000001 --query "PartsCount") &&
     seq 2 ${PARTS_COUNT} | while read PART
     do
-        aws s3api get-object --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part ${PART}
+        aws s3api get-object --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part ${PART} parts/$(printf %08d ${PART})
     done &&
-    
+    cat parts/* > ${NAME}-${TSTAMP}.tar.gz &&
+    gunzip ${NAME}-${TSTAMP}.tar.gz &&
+    tar --extract --file ${NAME}-${TSTAM}.tar
