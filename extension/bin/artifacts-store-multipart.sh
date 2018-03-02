@@ -40,11 +40,11 @@ done &&
     "Parts": [
 EOF
     ) &&
-    ls -1 parts | while read FILE
+    ls -1 alpha | while read FILE
     do
         echo aws s3api upload-part --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part-number $(pwd)/${FILE##+(0)} --body alpha/${FILE} --upload-id ${UPLOAD_ID} --query "ETag" &&
             BEFORE=$(date +%s) &&
-            ETAG=$(aws s3api upload-part --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part-number $(pwd)/${FILE##+(0)} --body alpha/${FILE} --upload-id ${UPLOAD_ID} --query "ETag") &&
+            ETAG=$(aws s3api upload-part --bucket ${BUCKET} --key ${NAME}-${TSTAMP}.tar.gz --part-number ${FILE##+(0)} --body alpha/${FILE} --upload-id ${UPLOAD_ID} --query "ETag") &&
             if [ ${?} != 0 ]
             then
                 echo FAILED TO PREPARE PART -- ${FILE} -- ${ETAG}
