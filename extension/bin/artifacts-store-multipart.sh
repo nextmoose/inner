@@ -59,7 +59,7 @@ EOF
                 )
             fi &&
             (cat >> fileparts <<EOF
-    { "ETag": "${ETAG}", "PartNumber": ${FILE##+(0)} }
+    { "ETag": ${ETAG}, "PartNumber": ${FILE##+(0)} }
 EOF
             )
     done
