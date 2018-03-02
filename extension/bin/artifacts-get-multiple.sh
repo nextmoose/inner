@@ -34,4 +34,4 @@ done &&
     done &&
     cat parts/* > ${NAME}-${TSTAMP}.tar.gz &&
     gunzip ${NAME}-${TSTAMP}.tar.gz &&
-    tar --extract --file ${NAME}-${TSTAM}.tar
+    tar --extract --file ${NAME}-${TSTAMP}.tar
