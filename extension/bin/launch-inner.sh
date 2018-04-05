@@ -34,7 +34,7 @@ done &&
         --name ${NAME} \
         --privileged \
         --env CLOUD9_PORT \
-        --env PROJECT_NAME \
+        --env PROJECT_NAME="${NAME}" \
         --env USER_NAME \
         --env USER_EMAIL \
         --env GPG_SECRET_KEY \
