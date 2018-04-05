@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo STARTING &&
 while [ ${#} -gt 0 ]
 do
     case ${1} in
@@ -51,5 +52,5 @@ done &&
         --mount type=bind,source=/srv/host/tmp/.X11-unix,destination=/tmp/.X11-unix,readonly=true \
         --label expiry=$(date --date "now + 1 month" +%s) \
         rebelplutonium/inner:${MAJOR}.${MINOR}.${PATCH} &&
-    docker network connect --alias inner main ${NAME} &&
+    docker network connect --alias ${NAME} main ${NAME} &&
     docker start ${NAME}
