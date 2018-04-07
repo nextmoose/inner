@@ -19,9 +19,4 @@ TEMP=$(mktemp -d) &&
     ln -sf ${HOME}/.ssh ${WORKSPACE_DIR}/dot_ssh &&
     ln -sf ${HOME}/bin ${WORKSPACE_DIR} &&
     pass git fetch origin master &&
-    pass git checkout master &&
-    ls -1 /opt/cloud9/extension/completion | while read SCRIPT
-    do
-        cp /opt/cloud9/extension/completion/${SCRIPT} ${HOME}/.bash_completion.d/${SCRIPT%.*} &&
-            chmod 0644 ${HOME}/.bash_completion.d/${SCRIPT%.*}
-    done
+    pass git checkout master
