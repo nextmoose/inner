@@ -27,7 +27,7 @@ do
         ;;
     esac
 done &&
-    export WORKSPACE_DIR=$(mktemp -d /opt/docker/workspace/docker/XXXXXXXX) &&
+    export WORKSPACE_DIR=$(mktemp -d ${WORKSPACE_DIR}/docker/XXXXXXXX) &&
     docker \
         container \
         create \
