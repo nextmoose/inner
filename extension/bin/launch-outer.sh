@@ -57,8 +57,7 @@ EOF
     echo "${GPG_OWNER_TRUST}" > ${WORKDIR}/public/gpg.owner.trust &&
     echo "${GPG2_OWNER_TRUST}" > ${WORKDIR}/public/gpg2.owner.trust &&
     cd ${WORKDIR} &&
-    sudo \
-        /usr/bin/docker \
+    docker \
         run \
         --interactive \
         --rm \
