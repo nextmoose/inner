@@ -47,7 +47,7 @@ export MONIKER=$(uuidgen) &&
     export DOCKER_SEMVER=18.02.0 &&
     export BROWSER_SEMVER=0.0.0 &&
     export MIDDLE_SEMVER=${MIDDLE_SEMVER} &&
-    export INNER_SEMVER="${INNER_SEMVER}
+    export INNER_SEMVER=${INNER_SEMVER}
 
 EOF
     ) &&
