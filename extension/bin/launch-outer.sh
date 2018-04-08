@@ -1,38 +1,42 @@
 #!/bin/sh
 
-while [ ${#} -gt 0 ]
-do
-    case ${1} in
-        --inner-semver)
-            export INNER_SEMVER="${2}" &&
-                shift 2
-        ;;
-        --middle-semver)
-            export MIDDLE_SEMVER="${2}" &&
-                shift 2
-        ;;
-        --major)
-            MAJOR="${2}" &&
-                shift 2
-        ;;
-        --minor)
-            MINOR="${2}" &&
-                shift 2
-        ;;
-        --patch)
-            PATCH="${2}" &&
-                shift 2
-        ;;
-       *)
-            echo Unknown Option &&
-                echo ${0} &&
-                echo ${@} &&
-                exit 64
-        ;;
-    esac
-done &&
-
-WORKDIR=$(mktemp -d ${WORKSPACE_DIR}/XXXXXXXX) &&
+export MONIKER=e4e46485-843a-4421-8563-00fd04693a4f &&
+    while [ ${#} -gt 0 ]
+    do
+        case ${1} in
+            --moniker)
+                export MONIKER="${2}" &&
+                    shift 2
+            ;;
+            --inner-semver)
+                export INNER_SEMVER="${2}" &&
+                    shift 2
+            ;;
+            --middle-semver)
+                export MIDDLE_SEMVER="${2}" &&
+                    shift 2
+            ;;
+            --major)
+                MAJOR="${2}" &&
+                    shift 2
+            ;;
+            --minor)
+                MINOR="${2}" &&
+                    shift 2
+            ;;
+            --patch)
+                PATCH="${2}" &&
+                    shift 2
+            ;;
+           *)
+                echo Unknown Option &&
+                    echo ${0} &&
+                    echo ${@} &&
+                    exit 64
+            ;;
+        esac
+    done &&
+    WORKDIR=$(mktemp -d ${WORKSPACE_DIR}/XXXXXXXX) &&
     (cat > ${WORKDIR}/public.env <<EOF
 #!/bin/sh
 
@@ -61,8 +65,9 @@ EOF
         run \
         --interactive \
         --rm \
-        --label expiry=$(($(date +%s)+60*60*24*7)) \
-        --mount type=bind,source=/srv/host/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
+        --label expiry=$(($(date +%s)+60*60*24)) \
+        --mount type=bind,source=/srv/hostuuidgen
+        /var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
         --mount type=bind,source=$(pwd),destination=/srv/working \
         --env DISPLAY \
         rebelplutonium/outer:${MAJOR}.${MINOR}.${PATCH} \
