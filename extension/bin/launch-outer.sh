@@ -7,8 +7,8 @@ do
             export INNER_SEMVER="${2}" &&
                 shift 2
         ;;
-        --outer-semver)
-            export OUTER_SEMVER="${2}" &&
+        --middle-semver)
+            export MIDDLE_SEMVER="${2}" &&
                 shift 2
         ;;
         --major)
