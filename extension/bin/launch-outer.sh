@@ -62,7 +62,7 @@ EOF
         --interactive \
         --rm \
         --label expiry=$(($(date +%s)+60*60*24*7)) \
-        --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
+        --mount type=bind,source=/srv/host/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
         --mount type=bind,source=$(pwd),destination=/srv/working \
         --env DISPLAY \
         rebelplutonium/outer:${MAJOR}.${MINOR}.${PATCH} \
