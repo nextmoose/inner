@@ -56,6 +56,7 @@ EOF
     echo "${GPG2_SECRET_KEY}" > ${WORKDIR}/private/gpg2.secret.key &&
     echo "${GPG_OWNER_TRUST}" > ${WORKDIR}/public/gpg.owner.trust &&
     echo "${GPG2_OWNER_TRUST}" > ${WORKDIR}/public/gpg2.owner.trust &&
+    cd ${WORKDIR} &&
     sudo \
         /usr/bin/docker \
         run \
