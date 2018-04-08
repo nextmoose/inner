@@ -1,6 +1,16 @@
 #!/bin/sh
 
-export CLOUD9_PORT=10604 &&
+CIDFILE=$(create-docker-id-file) &&
+    rm -f ${CIDFILE} &&
+    cleanup(){
+        docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
+        rm -f ${CIDFILE}
+    } &&
+    trap cleanup EXIT &&
+    export PROJECT_NAME=secrets-01 &&
+    export CLOUD9_PORT=10604 &&
+    export HOST_NAME=github.com &&
+    export HOST_PORT=22 &&
     export EXPIRY="now + 1 month" &&
     while [ ${#} -gt 0 ]
     do
@@ -61,13 +71,61 @@ export CLOUD9_PORT=10604 &&
             ;;
         esac
     done &&
-    CIDFILE=$(create-docker-id-file) &&
-    rm -f ${CIDFILE} &&
-    cleanup(){
-        docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
-        rm -f ${CIDFILE}
-    } &&
-    trap cleanup EXIT &&
+    if [ -z "${PROJECT_NAME}" ]
+    then
+        echo Unspecified PROJECT_NAME &&
+            exit 65
+    fi &&
+    if [ -z "${CLOUD9_PORT}" ]
+    then
+        echo Unspecified Cloud9 Port &&
+            exit 66
+    fi &&
+    if [ -z "${ORIGIN_ID_RSA}" ]
+    then
+        echo Unspecified ORIGIN_ID_RSA &&
+            exit 67
+    fi &&
+    if [ -z "${ORIGIN_ORGANIZATION}" ]
+    then
+        echo Unspecified ORIGIN_ORGANIZATION &&
+            exit 68
+    fi &&
+    if [ -z "${ORIGIN_REPOSITORY}" ]
+    then
+        echo Unspecified ORIGIN_REPOSITORY &&
+            exit 69
+    fi &&
+    if [ -z "${HOST_NAME}" ]
+    then
+        echo Unspecified HOST_NAME &&
+            exit 70
+    fi &&
+    if [ -z "${HOST_PORT}" ]
+    then
+        echo Unspecified HOST_PORT &&
+            exit 71
+    fi &&
+    if [ -z "${USER_NAME}" ]
+    then
+        echo Unspecified USER_NAME &&
+            exit 72
+    fi &&
+    if [ -z "${USER_EMAIL}" ]
+    then
+        echo Unspecified USER_EMAIL &&
+            exit 73
+    fi &&
+    if [ -z "${READ_WRITE}" ] && [ -z "${READ_ONLY}" ]
+    then
+        echo Unspecified READ_WRITE or READ_ONLY &&
+            exit 74
+    fi &&
+    if [ -z "${EXPIRY}" ]
+    then
+        echo Unspecified EXPIRY &&
+            exit 75
+    fi &&
     docker \
         container \
         create \
