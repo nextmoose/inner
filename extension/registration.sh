@@ -9,4 +9,5 @@ gitlab-runner \
     --executor docker \
     --docker-image docker:18.02.0-ce \
     --docker-network-mode main \
+    --env DOCKER_HOST="${DOCKER_HOST}" \
     --docker-host ${DOCKER_HOST}
