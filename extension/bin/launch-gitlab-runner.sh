@@ -27,7 +27,7 @@ done &&
         container \
         create \
         --name gitlab-runner \
-        --restart-always \
+        --restart always \
         --mount type=volume,source=${CONFIGURATION_VOLUME},destination=/etc/gitlab-runner,readonly=false \
         --env DOCKER_HOST \
         gitlab/gitlab-runner:v10.7.0 &&
