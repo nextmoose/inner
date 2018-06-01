@@ -12,17 +12,19 @@ export PASSPHRASE=${1} &&
     (cat <<EOF
 rm -rf /tmp/volumes &&
     mkdir -p /tmp/volumes &&
-    docker volume ls --quiet | while read VOLUME
+    for VOLUME in \$(docker volume ls --quiet)
     do
         mkdir -p /tmp/volumes/\${VOLUME} &&
-            docker run --interactive --rm --volume \${VOLUME}:/in:ro --volume /tmp/volumes/\${VOLUME}/out alpine:3.4 cp -r /in/. /out
+            docker run --interactive --rm --volume \${VOLUME}:/in:ro --volume /tmp/volumes/\${VOLUME}/out alpine:3.4 cp -r /in/. /out &&
+            echo mkdir -p /tmp/volumes/\${VOLUME} &&
+            echo docker run --interactive --rm --volume \${VOLUME}:/in:ro --volume /tmp/volumes/\${VOLUME}/out alpine:3.4 cp -r /in/. /out
     done
 EOF
     ) | ssh hpr &&
     cd $(mktemp -d) &&
     mkdir -p rsync &&
     rsync --archive --delete --progress hpr:/tmp rsync &&
-    tar --create --file volumes.tar --directory rsync . &&
+    sudo tar --create --file volumes.tar --directory rsync . &&
     sudo rm -rf rsync &&
     gzip -9 volumes.tar &&
     mkdir splits &&
