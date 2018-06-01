@@ -7,7 +7,7 @@ sudo dnf install --assumeyes rsync dvdisaster genisoimage &&
             echo us-east-1 &&
             echo text
     ) | aws configure &&
-    cd $(mktemp -d /opt/docker/workspace/XXXXXXXX) &&
+    cd $(mktemp -d /opt/cloud9/workspace//XXXXXXXX) &&
     seq 0 6 | while read I
     do
         aws s3 cp s3://hp-pavillion/home.tar.gz.0${I}.gpg.iso hp-pavillion/home.tar.gz.0${I}.gpg.iso &&
