@@ -37,8 +37,8 @@ EOF
             mkisofs -o ${FILE}.gpg.iso -r -J splits/${FILE}.gpg &&
             rm splits/${FILE}.gpg &&
             dvdisaster --image ${FILE}.gpg.iso -mRS01 --redundancy high --create ${FILE}.gpg.iso --ecc ${FILE}.gpg.iso.ecc &&
-        aws s3 cp ${FILE}.gpg.iso s3://hp-pavillion/${FILE}.gpg.iso &&
-        aws s3 cp ${FILE}.gpg.iso s3://hp-pavillion/${FILE}.gpg.iso.ecc &&
-        rm ${FILE}.gpg.iso ${FILE}.gpg.iso.ecc
+            aws s3 cp ${FILE}.gpg.iso s3://hp-pavillion/${FILE}.gpg.iso &&
+            aws s3 cp ${FILE}.gpg.iso s3://hp-pavillion/${FILE}.gpg.iso.ecc &&
+            rm ${FILE}.gpg.iso ${FILE}.gpg.iso.ecc
     done
 
