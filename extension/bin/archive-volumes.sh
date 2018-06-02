@@ -30,6 +30,7 @@ EOF
     mkdir splits &&
     split --bytes 450M --numeric-suffixes volumes.tar.gz splits/volumes.tar.gz. &&
     rm volumes.tar.gz &&
+    ls -1 splits &&
     for FILE in $(ls -1 splits)
     do
         echo ${PASSPHRASE} | gpg --passphrase-fd 0 --sign --encrypt --recipient "Emory Merryman" splits/${FILE} &&
@@ -42,11 +43,13 @@ EOF
                 echo FAILED TO UPLOAD &&
                     sleep 60s
             done &&
-            while ! aws s3 cp ${FILE}.gpg.iso s3://hp-pavillion/${FILE}.gpg.iso.ecc
+            echo SUCCESSFULLY UPLOADED ${FILE}.gpg.iso &&
+            while ! aws s3 cp ${FILE}.gpg.iso.ecc s3://hp-pavillion/${FILE}.gpg.iso.ecc
             do
                 echo FAILED TO UPLOAD &&
                     sleep 60s
             done &&
+            echo SUCCESSFULLY UPLOADED ${FILE}.gpg.iso.ecc &&
             rm ${FILE}.gpg.iso ${FILE}.gpg.iso.ecc
     done
 
