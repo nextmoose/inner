@@ -30,7 +30,7 @@ EOF
     mkdir splits &&
     split --bytes 450M --numeric-suffixes volumes.tar.gz splits/volumes.tar.gz. &&
     rm volumes.tar.gz &&
-    ls -1 splits | while read FILE
+    for FILE in $(ls -1 splits)
     do
         echo ${PASSPHRASE} | gpg --passphrase-fd 0 --sign --encrypt --recipient "Emory Merryman" splits/${FILE} &&
             rm splits/${FILE} &&
