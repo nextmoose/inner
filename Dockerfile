@@ -1,2 +1,2 @@
-ARG CLOUD9_SEMVER=1.4.12
-FROM rebelplutonium/cloud9:${CLOUD9_SEMVER}
+ARG BASE_IMAGE=docker:18.03.1-ce-dind
+FROM ${BASE_IMAGE}
