@@ -15,7 +15,7 @@ rm -rf /tmp/volumes &&
     for VOLUME in \$(docker volume ls --quiet)
     do
         mkdir -p /tmp/volumes/\${VOLUME} &&
-            docker run --interactive --rm --volume \${VOLUME}:/in:ro --volume /tmp/volumes/\${VOLUME}:out alpine:3.4 cp -r /in/. /out
+            docker run --interactive --rm --volume \${VOLUME}:/in:ro --volume /tmp/volumes/\${VOLUME}:/out alpine:3.4 cp -r /in/. /out
     done
 EOF
     ) | ssh hpr &&
