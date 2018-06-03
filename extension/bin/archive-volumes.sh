@@ -26,7 +26,7 @@ EOF
     sudo rm -rf rsync &&
     gzip -9 volumes.tar &&
     mkdir splits &&
-    split --bytes 450M --numeric-suffixes volumes.tar.gz splits/volumes.tar.gz. &&
+    split --bytes 1368000 --numeric-suffixes volumes.tar.gz splits/volumes.tar.gz. &&
     rm volumes.tar.gz &&
     ls -1 splits &&
     for FILE in $(ls -1 splits)
