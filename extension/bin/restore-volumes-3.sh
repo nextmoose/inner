@@ -11,7 +11,7 @@
     cd $(mktemp -d /opt/cloud9/workspace/XXXXXXXX) &&
     for I in $(aws s3 ls hp-pavillion | grep volumes.tar.gz | grep "iso\$" | sed -e "s#^.*volumes.tar[.]gz[.]##" | sed -e "s#[.]gpg[.]iso\$##")
     do
-        docker container run --interactive --volume /srv/host/home/user:/in:ro --volume $(pwd):/out alpine:3.4 cp in/volumes.tar.gz.${I}.gpg out/home.tar.gz.${I}.gpg &&
+        docker container run --interactive --volume /srv/host/home/user:/in:ro --volume $(pwd):/out alpine:3.4 cp in/volumes.tar.gz.${I}.gpg out/volumes.tar.gz.${I}.gpg &&
             echo ${PASSPHRASE} | gpg volumes.tar.gz.${I}.gpg --passphrase-fd 0 &&
             cat volumes.tar.gz.${I} >> home.tar.gz
     done &&
