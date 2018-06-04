@@ -1,13 +1,20 @@
 #!/bin/sh
 
-PASSPHRASE=${1} &&
+(
+    pass show aws-access-key-id &&
+        pass show aws-secret-access-key &&
+        echo us-east-1 &&
+        echo text
+        
+) | aws configure &&
+    PASSPHRASE=${1} &&
     cd $(mktemp -d /opt/cloud9/workspace/XXXXXXXX) &&
-    for I in $(seq 0 6)
+    for I in $(aws s3 ls hp-pavillion | grep volumes.tar.gz | grep "iso\$" | sed -e "s#^.*volumes.tar[.]gz[.]##" | sed -e "s#[.]gpg[.]iso\$##")
     do
-        docker container run --interactive --volume /srv/host/home/user:/in:ro --volume $(pwd):/out alpine:3.4 cp in/home.tar.gz.0${I}.gpg out/home.tar.gz.0${I}.gpg &&
-            echo ${PASSPHRASE} | gpg home.tar.gz.0${I}.gpg --passphrase-fd 0 &&
-            cat home.tar.gz.0${I} >> home.tar.gz
+        docker container run --interactive --volume /srv/host/home/user:/in:ro --volume $(pwd):/out alpine:3.4 cp in/volumes.tar.gz.${I}.gpg out/home.tar.gz.${I}.gpg &&
+            echo ${PASSPHRASE} | gpg volumes.tar.gz.${I}.gpg --passphrase-fd 0 &&
+            cat volumes.tar.gz.${I} >> home.tar.gz
     done &&
-    gunzip home.tar.gz &&
-    tar --extract --file home.tar &&
+    gunzip volumes.tar.gz &&
+    tar --extract --file volumes.tar &&
     pwd
