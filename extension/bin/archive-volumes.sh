@@ -21,7 +21,7 @@ EOF
     ) | ssh hpr &&
     cd $(mktemp -d) &&
     mkdir -p rsync &&
-    rsync --archive --delete --progress hpr:/tmp rsync &&
+    rsync --archive --delete --progress hpr:/tmp/volumes rsync &&
     sudo tar --create --file volumes.tar --directory rsync . &&
     sudo rm -rf rsync &&
     gzip -9 volumes.tar &&

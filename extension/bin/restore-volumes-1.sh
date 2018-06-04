@@ -9,7 +9,7 @@ sudo dnf install --assumeyes rsync dvdisaster genisoimage &&
             
     ) | aws configure &&
     cd $(mktemp -d /opt/cloud9/workspace/XXXXXXXX) &&
-    for I in $(seq 0 6)
+    for I in $(aws s3 ls hp-pavillion | grep volumes.tar.gz | grep "iso\$" | sed -e "s#^.*volumes.tar[.]gz[.]##" | sed -e "s#[.]gpg[.]iso\$##")
     do
         aws s3 cp s3://hp-pavillion/volumes.tar.gz.0${I}.gpg.iso hp-pavillion/volumes.tar.gz.0${I}.gpg.iso &&
             docker container run --interactive --rm --volume $(pwd):/in:ro --volume /srv/host/volumes/user:/out alpine:3.4 cp /in/hp-pavillion/volumes.tar.gz.0${I}.gpg.iso /out/volumes.tar.gz.0${I}.gpg.iso &&
