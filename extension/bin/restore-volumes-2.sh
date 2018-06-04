@@ -6,7 +6,7 @@ do
     mkdir -p mount.${FILE} &&
         sudo mount -o loop ${FILE} mount.${FILE} &&
         GPG_FILE=${FILE%.*} &&
-        cp mount.${FILE}/${FILE} ${GPG_FILE} &&
+        cp mount.${FILE}/${GPG_FILE} ${GPG_FILE} &&
         sleep 1 &&
         sudo umount mount.${FILE} &&
         rm -rf mount.${FILE}
