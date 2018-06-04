@@ -12,7 +12,7 @@
     for I in $(aws s3 ls hp-pavillion | grep volumes.tar.gz | grep "iso\$" | sed -e "s#^.*volumes.tar[.]gz[.]##" | sed -e "s#[.]gpg[.]iso\$##")
     do
         docker container run --interactive --volume /srv/host/home/user:/in:ro --volume $(pwd):/out alpine:3.4 cp in/volumes.tar.gz.${I}.gpg out/volumes.tar.gz.${I}.gpg &&
-            echo ${PASSPHRASE} | gpg volumes.tar.gz.${I}.gpg --passphrase-fd 0 &&
+            echo ${PASSPHRASE} | gpg --passphrase-fd 0 volumes.tar.gz.${I}.gpg &&
             cat volumes.tar.gz.${I} >> home.tar.gz
     done &&
     gunzip volumes.tar.gz &&
