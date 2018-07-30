@@ -1,5 +1,5 @@
 #!/bin/sh
 
-CIDFILE=$(mktemp) &&
+CIDFILE=$(mktemp /run/docker/unencrypted/containers/XXXXXXXX) &&
     rm -f ${CIDFILE} &&
     echo ${CIDFILE}
