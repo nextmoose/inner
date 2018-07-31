@@ -50,11 +50,11 @@ export CLOUD9_PORT=10604 &&
                     shift 2
                 ;;
             --committer-name)
-                export USER_NAME="${2}" &&
+                export COMMITTER_NAME="${2}" &&
                     shift 2
                 ;;
             --committer-email)
-                export USER_NAME="${2}" &&
+                export COMMITER_NAME="${2}" &&
                     shift 2
                 ;;
             --read-write)
@@ -109,7 +109,7 @@ export CLOUD9_PORT=10604 &&
     then
         echo Missing UPSTREAM_ORGANIZATION &&
             exit 73
-    elif [ -z "${COMMITER_NAME}" ]
+    elif [ -z "${COMMITTER_NAME}" ]
     then
         echo Missing COMMITTER_NAME &&
             exit 74
@@ -136,11 +136,12 @@ export CLOUD9_PORT=10604 &&
     fi &&
     CIDFILE=$(cidfile) &&
     cleanup(){
-        docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
+        sudo docker container stop $(cat ${CIDFILE}) && docker container rm --volumes $(cat ${CIDFILE})
         rm -f ${CIDFILE}
     } &&
     trap cleanup EXIT &&
-    docker \
+    sudo \
+        docker \
         container \
         create \
         --cidfile ${CIDFILE} \
@@ -163,7 +164,7 @@ export CLOUD9_PORT=10604 &&
         --label timestamp=${TIMESTAMP} \
         rebelplutonium/secret-editor:2.0.0 \
         &&
-    docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
-    docker network disconnect bridge $(cat ${CIDFILE}) &&
-    docker container start --interactive $(cat ${CIDFILE}) &&
+    sudo docker network connect --alias ${PROJECT_NAME} ${MAIN_NETWORK} $(cat ${CIDFILE}) &&
+    sudo docker network disconnect bridge $(cat ${CIDFILE}) &&
+    sudo docker container start --interactive $(cat ${CIDFILE}) &&
     true
