@@ -11,4 +11,4 @@ _UseGetOpt_docker(){
         esac
 }
 
-complete -F _UseGetOpt_hello -o filenames hello
+complete -F _UseGetOpt_docker -o filenames docker
